@@ -1,0 +1,167 @@
+    * {
+        font-family: "Roboto-Bold" !important;
+    }
+    
+    [display] {
+        --background: var(--primary-background);
+    }
+    
+    [big-heading] {
+        padding-left: 10px;
+        font-size: 25px !important;
+    }
+    
+    [small-heading] {
+        font-family: "Roboto-Regular" !important;
+        margin-left: auto;
+        margin-top: 20px;
+        padding-left: 10px;
+        font-size: 15px;
+        opacity: .8;
+    }
+    
+    [images] {
+        max-width: 300px;
+        max-height: 300px;
+    }
+    
+    [card-info] {
+        max-height: 100%;
+        display: flex;
+        flex-direction: column;
+        box-shadow: none;
+        scroll-behavior: auto;
+        overflow-y: hidden;
+        overflow-y: auto;
+    }
+    
+    [card-display] {
+        max-height: 100%;
+        box-shadow: none;
+        scroll-behavior: auto;
+        overflow-y: hidden;
+        overflow-y: auto;
+    }
+    
+    [card-dichiarazione] {
+        height: 400px;
+        width: 95%;
+        margin: auto;
+        scroll-behavior: auto;
+        overflow-y: hidden;
+        overflow-y: auto;
+    }
+    
+    ion-input {
+        --placeholder-color: var(--ion-color-step-450);
+    }
+    
+    ion-title {
+        font-family: "Roboto-Bold" !important;
+        font-size: 23px !important;
+    }
+    
+    ion-slides {
+        height: 100%;
+    }
+    
+    .swiper-slide {
+        display: block;
+        scroll-behavior: auto;
+    }
+    
+    .swiper-slide h2 {
+        margin-top: 2.8rem;
+    }
+    
+    ion-row {
+        margin-top: 5px;
+        //border: 1px solid #000;
+    }
+    
+    .damage-card {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        img {
+            width: auto;
+            height: 200px;
+            border-radius: 5%;
+        }
+    }
+    
+    .damage-display>* {
+        flex: 1 auto;
+    }
+    /* Due to the fact the cards are inside of columns the margins don't overlap
+   * properly so we want to remove the extra margin between cards
+   */
+    
+    ion-col:not(:last-of-type) .damage-card {
+        margin-bottom: 0;
+    }
+    
+    .damage-card ion-card-header {
+        padding: 20;
+    }
+    
+    .damage-card ion-card-content {
+        flex: 1 1 auto;
+    }
+    
+    .ios ion-list {
+        margin-bottom: 10px;
+    }
+    
+    .md ion-list {
+        //border-top: 1px solid var(--ion-color-step-150, #d7d8da);
+        padding: 10px;
+    }
+    
+    $categories: ( dent: var(--ion-color-success), scratch: var(--ion-color-tertiary), missing: var(--ion-color-danger), );
+    @each $damage,
+    $value in map-remove($categories) {
+        ion-list[damage='#{$damage}'] {
+            border-left: 2px solid $value;
+            padding-left: 10px;
+            margin-left: 10px;
+            margin-right: 10px;
+        }
+    }
+    
+    .card-item {
+        font-size: 13px;
+    }
+    
+    .vehicle-select {
+        --ion-grid-width-xl: 60%;
+        --ion-grid-width-lg: 65%;
+        --ion-grid-width-md: 65%;
+        --ion-grid-width: 90%;
+    }
+    
+    .damage-create-row {
+        display: flex;
+    }
+    
+    .container {
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        margin: auto;
+        position: relative;
+    }
+    
+    .container canvas,
+    #clear {
+        position: absolute;
+        right: 0px;
+    }
+    
+    canvas {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-right: -50%;
+        transform: translate(-50%, -50%)
+    }

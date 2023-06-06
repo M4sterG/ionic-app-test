@@ -1,0 +1,36 @@
+
+<ion-content class="ion-no-border">
+  <ion-card style="border-radius: 0px;" display login-card>
+<ion-header class="ion-no-border">
+  <div class="home-header ion-padding">
+    <img  pc   src="../../../assets/img/loghino.png" />
+    <img  tel src="../../../assets/img/logobianco.png" />
+  </div>
+</ion-header>
+  <div>
+    <div heading-collumn-lr>
+      <h1 big-heading>Login</h1> 
+    </div>
+    <ion-label small-heading>
+      Vi diamo il benvenuto sull'app ufficiale di testapp Srl
+    </ion-label>
+  </div>
+  <br>
+  <ion-item transparent>
+    <ion-icon name="person-outline" icon-small></ion-icon>
+    <ion-input #username placeholder="Username" type="text" ngModel required></ion-input>
+  </ion-item>
+
+  <ion-item transparent>
+    <ion-icon name="lock-closed-outline" icon-small></ion-icon>
+    <ion-input #password placeholder="Password" type="password" ngModel required></ion-input>
+  </ion-item>
+
+  <div class="linespace"></div>
+  <div ion-linespace></div>
+  <ion-button (click)="login()" login-btn class="ion-button-class" fill="solid" size="large" margin expand="block">
+    Login
+  </ion-button>
+  <ion-label class="ion-text-center">Password dimenticata? <span class="link-button" (click)="router.navigate(['recuperopassword'])">Clicca qui!</span></ion-label>
+</ion-card>
+</ion-content>

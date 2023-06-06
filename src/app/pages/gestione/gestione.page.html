@@ -1,0 +1,67 @@
+<ion-header menu-ui class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Gestione Documenti</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="form">
+        <mat-form-field floatPlaceholder="never" color="accent">
+            <input matInput #filter placeholder="Filter issues" />
+        </mat-form-field>
+    </div>
+    <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+        <ng-container matColumnDef="fileName">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Nome File</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.fileName}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="createdBy">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Creato da</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.createdBy}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="notes">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Note</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.notes}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="createdAt">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Creato il</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{row.createdAt | date: 'dd-MM-yyyy'}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="actions">
+            <mat-header-cell *matHeaderCellDef>
+                <button mat-icon-button color="primary" (click)="addNew()">
+                    <mat-icon aria-label="Example icon-button with a heart icon">add</mat-icon>
+                </button>
+                <button mat-icon-button (click)="refresh()">
+                    <mat-icon>refresh</mat-icon>
+                </button>
+            </mat-header-cell>
+
+            <mat-cell *matCellDef="let row; let i=index;">
+                <button mat-icon-button color="accent" (click)="startEdit(i, row)">
+                    <mat-icon aria-label="Edit">edit</mat-icon>
+                </button>
+
+                <button mat-icon-button color="accent" (click)="deleteItem(i, row)">
+                    <mat-icon aria-label="Delete">delete</mat-icon>
+                </button>
+            </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="columnNames"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columnNames;"></mat-row>
+    </mat-table>
+    <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">
+        No results
+    </div>
+    <mat-paginator #paginator [length]="10" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[5, 10, 25, 100]">
+    </mat-paginator>
+</ion-content>

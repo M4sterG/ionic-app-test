@@ -1,0 +1,29 @@
+<ion-header menu-ui class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Home</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content display padding>
+    <ion-grid>
+        <ion-row>
+            <ion-col size="auto">
+                <ion-button style="width: 200px; height: 50px" [routerLink]="['/dichiarazioni']">Utilizza veicolo</ion-button>
+            </ion-col>
+            <ion-col size="auto">
+                <ion-button style="width: 200px; height: 50px" [routerLink]="['/dichiarazioni']">Fine utilizzo</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="auto">
+                <ion-button style="width: 200px; height: 50px" [routerLink]="['/dichiarazioni']">Richiedi ferie</ion-button>
+            </ion-col>
+            <ion-col size="auto">
+                <ion-button style="width: 200px; height: 50px" [routerLink]="['/dichiarazioni']">Mutua</ion-button>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

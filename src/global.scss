@@ -1,0 +1,173 @@
+    /*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+    /* Core CSS required for Ionic components to work properly */
+    
+    @import "~@ionic/angular/css/core.css";
+    /* Basic CSS for apps built with Ionic */
+    
+    @import "~@ionic/angular/css/normalize.css";
+    @import "~@ionic/angular/css/structure.css";
+    @import "~@ionic/angular/css/typography.css";
+    @import '~@ionic/angular/css/display.css';
+    /* Optional CSS utils that can be commented out */
+    
+    @import "~@ionic/angular/css/padding.css";
+    @import "~@ionic/angular/css/float-elements.css";
+    @import "~@ionic/angular/css/text-alignment.css";
+    @import "~@ionic/angular/css/text-transformation.css";
+    @import "~@ionic/angular/css/flex-utils.css";
+    /*  */
+    
+     :root {
+        .popover-content {
+            width: 330px;
+        }
+    }
+    
+    @media(max-width:750px) {
+         :root {
+            .popover-content {
+                width: 330px;
+            }
+        }
+    }
+    
+    body {
+        color: var(--ion-color-step-750);
+        background: var(--primary-background);
+    }
+    
+    .dark-theme * {
+        color: var(--ion-color-step-750);
+    }
+    
+    ion-title {
+        font-family: "Heebo-Bold" !important;
+        font-size: 23px !important;
+        color: var(--ion-color-step-150);
+    }
+    
+    .dark-theme ion-title {
+        font-family: "Heebo-Bold" !important;
+        font-size: 23px !important;
+        color: var(--ion-color-step-750);
+    }
+    
+    ion-button {
+        --background: var(--primary-accent);
+        color: var(--ion-color-step-150);
+    }
+    
+    ion-toolbar {
+        --background: var(--primary-accent);
+        color: var(--ion-color-step-150);
+    }
+    
+    ion-header {
+        --background: var(--primary-accent);
+    }
+    
+    ion-card {
+        overflow-y: hidden;
+        overflow-x: hidden;
+    }
+    
+     ::-webkit-scrollbar {
+        display: none;
+    }
+
+    @import '~@angular/material/theming';
+@import url('//fonts.googleapis.com/icon?family=Material+Icons');
+@include mat-core();
+$primary: mat-palette($mat-indigo,
+500);
+$accent: mat-palette($mat-pink,
+500,
+A200,
+A400);
+$warn: mat-palette($mat-red,
+500);
+$config: mat-typography-config();
+$theme: mat-light-theme($primary,
+$accent,
+$warn);
+@include angular-material-theme($theme);
+body {
+    font-family: mat-font-family($config);
+    font-weight: normal;
+    margin: 0;
+}
+
+
+/* Structure */
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+
+/* Toolbar */
+
+.spacer {
+    flex: 1 1 auto;
+}
+
+
+/* Filter */
+
+.form {
+    min-height: 56px;
+    max-height: 56px;
+    display: flex;
+    align-items: center;
+    padding: 8px 24px 0;
+    font-size: 20px;
+    justify-content: space-between;
+    border-bottom: 1px solid transparent;
+}
+
+.mat-form-field {
+    font-size: 14px;
+    flex-grow: 1;
+    margin-top: 8px;
+}
+
+
+/* Mat table */
+
+.no-results {
+    display: flex;
+    justify-content: center;
+    padding: 14px;
+    font-size: 14px;
+    font-style: italic;
+}
+
+.mat-cell:nth-child(1),
+.mat-header-cell:nth-child(1) {
+    flex: 0 0 6%;
+}
+
+.mat-cell:nth-child(2),
+.mat-header-cell:nth-child(2) {
+    flex: 0 0 30%;
+}
+
+.mat-cell:nth-child(3),
+.mat-header-cell:nth-child(3) {
+    flex: 0 0 6%;
+}
+
+.mat-cell:nth-child(7),
+.mat-header-cell:nth-child(7) {
+    flex: 0 0 7%;
+}

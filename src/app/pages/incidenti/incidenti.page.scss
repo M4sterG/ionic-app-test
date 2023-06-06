@@ -1,0 +1,50 @@
+[display] {
+    --background: var(--primary-background);
+}
+
+[big-heading] {
+    font-family: "Roboto-Bold" !important;
+    padding-left: 10px;
+    font-size: 25px !important;
+    color: var(--theme-black);
+}
+
+[medium-heading] {
+    font-family: "Roboto-Regular" !important;
+    margin-left: auto;
+    margin-top: 25px;
+    padding-left: 14px;
+    font-size: 18px;
+    color: #1c223a;
+}
+
+[small-heading] {
+    font-family: "Roboto-Regular" !important;
+    margin-left: auto;
+    margin-top: 20px;
+    padding-left: 10px;
+    font-size: 15px;
+    opacity: .8;
+    color: var(--theme-black);
+}
+
+ion-col {
+    --border-width: solid 0px;
+    align-self: center;
+    width: auto;
+}
+
+ion-input {
+    background: rgb(243, 241, 241);
+    --placeholder-color: grey;
+}
+
+ion-toolbar {
+    --background: var(--theme-color);
+}
+
+ion-title {
+    font-family: "Heebo-Bold" !important;
+    font-size: 23px !important;
+    color: white;
+}

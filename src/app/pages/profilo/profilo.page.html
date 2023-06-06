@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Profilo</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content display padding>
+    <div *ngIf="userdata != undefined">
+        <ion-card prova-card>
+            <div *ngIf="userdata.picture!==null;else that">
+                <ion-avatar>
+                    <img src="{{url + userdata.picture.path}}" />
+                </ion-avatar>
+            </div>
+            <ng-template #that>
+                <ion-avatar>
+                    <img src="../../../assets/img/avatar.png" />
+                </ion-avatar>
+            </ng-template>
+
+        </ion-card>
+        <div display>
+            <h1 big-heading>{{this.userdata.name + ' ' + this.userdata.surname}}</h1>
+            <!-- Tutti i dati delle card caselle vanno richiamate variabili del db ovviamente anche per il nome-->
+            <ion-card caselle>
+                <h2 medium-heading>Email: {{this.userdata.email}}</h2>
+            </ion-card>
+
+            <ion-card caselle>
+                <h2 h2 medium-heading>Data nascita:</h2>
+            </ion-card>
+
+            <ion-card caselle>
+                <h2 h2 medium-heading>Cod Fiscale: {{this.userdata.cf}}</h2>
+            </ion-card>
+
+            <ion-card caselle>
+                <h2 h2 medium-heading>N°telefono: 3336075036</h2>
+            </ion-card>
+            <ion-card caselle>
+                <h2 h2 medium-heading>Patente: 5025631</h2>
+            </ion-card>
+        </div>
+    </div>
+</ion-content>

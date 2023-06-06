@@ -1,0 +1,76 @@
+[display] {
+    --background: #1c223a;
+    width: 100%;
+    border-radius: 3%;
+}
+
+[caselle] {
+    margin-left: 10px !important;
+}
+
+[prova-card] {
+    margin-left: none;
+    margin-right: none;
+    margin: 0 !important;
+    width: 100%;
+    height: 270px;
+    background-image: radial-gradient(circle at top center, rgb(243, 177, 46), rgb(230, 153, 36), rgb(217, 129, 26), rgb(177, 83, 1), rgb(148, 63, 6));
+    ion-item {
+        position: absolute;
+        --background: hsla(0, 0%, 0%, 0);
+        margin: 0 !important;
+        width: 80px;
+        --border-width: 0;
+    }
+    ion-icon {
+        position: absolute;
+        margin-top: 10px;
+        margin-left: 10px;
+        color: white;
+    }
+    ion-avatar {
+        margin-top: 30px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 200px;
+        height: 200px;
+    }
+}
+
+ion-toolbar {
+    --background: var(--theme-color);
+}
+
+ion-title {
+    font-family: "Heebo-Bold" !important;
+    font-size: 23px !important;
+    color: white;
+}
+
+[big-heading] {
+    font-family: "Roboto-Bold" !important;
+    padding-left: 10px;
+    font-size: 25px !important;
+    color: var(--theme-white);
+}
+
+[medium-heading] {
+    font-family: "Roboto-Regular" !important;
+    margin-left: auto;
+    margin-top: 25px;
+    padding-left: 14px;
+    font-size: 18px;
+}
+
+[small-heading] {
+    font-family: "Roboto-Regular" !important;
+    margin-left: auto;
+    margin-top: 20px;
+    padding-left: 10px;
+    font-size: 15px;
+    opacity: .8;
+    color: var(--theme-white);
+}
+
+@media (min-width: 820px) {}

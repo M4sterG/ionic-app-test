@@ -1,0 +1,273 @@
+<ion-header menu-ui class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-menu-button menu="main-menu"></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Utilizza veicolo</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content display>
+    <ion-slides #slides (ionSlidesDidLoad)="lock()" (ionSlideReachEnd)="initializeCanvas()">
+        <ion-slide>
+            <ion-content class="scroll" display>
+                <ion-card>
+                    <h1 big-heading>Seleziona il veicolo</h1>
+                    <ion-grid fixed="true" class="vehicle-select">
+                        <ion-row>
+                            <ion-col>
+                                <ion-label>Targa</ion-label>
+                            </ion-col>
+                            <ion-col>
+                                <ion-select placeholder="Seleziona la targa" #plate interface="popover" (ionChange)="onChange($event)">
+                                    <ion-select-option *ngFor="let o of options" [value]="o">{{o}}</ion-select-option>
+                                </ion-select>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row>
+                            <ion-col>
+                                <div *ngIf="this.plate.value !== undefined">
+                                    <ion-card #vehicleInfo center card-info>
+                                        <ion-card-header>
+                                            <ion-card-title>{{vehicleName}}</ion-card-title>
+                                        </ion-card-header>
+                                        <ion-card-content>
+                                            <ion-grid grid size="4">
+                                                <ion-row>
+                                                    <ion-col>
+                                                        <img src="{{vehicleImage}}" />
+                                                    </ion-col>
+                                                </ion-row>
+                                                <ion-row>
+                                                    <ion-col> Descrizione veicolo: </ion-col>
+                                                    <ion-col>
+                                                        <ion-label style="font-weight: bold">{{vehicleDescription}}</ion-label>
+                                                    </ion-col>
+                                                </ion-row>
+                                                <ion-row>
+                                                    <ion-col> Immatricolazione veicolo: </ion-col>
+                                                    <ion-col>
+                                                        <ion-label style="font-weight: bold">{{vehicleImmatriculation}}</ion-label>
+                                                    </ion-col>
+                                                </ion-row>
+                                                <ion-row>
+                                                    <ion-col> Numero telaio veicolo: </ion-col>
+                                                    <ion-col>
+                                                        <ion-label style="font-weight: bold">{{vehicleVin}}</ion-label>
+                                                    </ion-col>
+                                                </ion-row>
+                                            </ion-grid>
+                                        </ion-card-content>
+                                    </ion-card>
+                                </div>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                    <ion-grid fixed="true" class="vehicle-select">
+                        <ion-row>
+                            <ion-col>
+                                <ion-button size="medium" (click)="slideNext()">Next</ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-content>
+        </ion-slide>
+
+        <ion-slide>
+            <ion-content class="scroll" display>
+                <ion-card card-display>
+                    <h1 big-heading>Il veicolo presenta gia i seguenti danni</h1>
+                    <!---<img class="logo-img" src="../../../assets/img/Sfondo.png" /> -->
+                    <div *ngIf="this.assessments != undefined; else elseBlock">
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col size="12" size-md="6" *ngFor="let d of damagesIn">
+                                    <ion-card class="damage-card">
+                                        <ion-card-header>
+                                            <ion-label style="font-weight: bold; font-size: 16px">Danno:</ion-label>
+                                        </ion-card-header>
+                                        <ion-card-content>
+                                            <ion-list lines="none" style="margin: 0; padding: 0; font-size: 12px" [attr.damage]="d.type | lowercase">
+                                                <ion-item ion-no-border class="card-item">
+                                                    <ion-label> {{damageMap[d.position]}} </ion-label>
+                                                </ion-item>
+                                                <ion-item class="card-item">
+                                                    <ion-label>
+                                                        {{positionMap[d.relativePosition]}}
+                                                    </ion-label>
+                                                </ion-item>
+                                                <ion-item class="card-item">
+                                                    <ion-label> {{typeMap[d.type]}} </ion-label>
+                                                </ion-item>
+                                            </ion-list>
+
+                                            <div style="text-align: center" *ngIf="d.picture!==null">
+                                                <img center src="{{url + d.picture.path}}" />
+                                            </div>
+                                        </ion-card-content>
+                                    </ion-card>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </div>
+                    <ng-template #elseBlock>Nessun danno ancora registrato.</ng-template>
+
+                    <ion-card card-dichiarazione>
+                        <h1 big-heading>Ulteriori danni</h1>
+                        <ion-grid fixed="true">
+                            <ion-row style="align-content: start">
+                                <ion-col>
+                                    <ion-list lines="none">
+                                        <ion-item stye="margin-bottom:0;">
+                                            <ion-label>Sono presenti nuovi danni?</ion-label>
+                                        </ion-item>
+                                        <ion-item>
+                                            <ion-radio-group style="display: flex; position: center" #radio value="false" (ionChange)="radioChange($event)">
+                                                <ion-item>
+                                                    <ion-label>Si</ion-label>
+                                                    <ion-radio style="margin-left: 5px" value="true"></ion-radio>
+                                                </ion-item>
+                                                <ion-item>
+                                                    <ion-label>No</ion-label>
+                                                    <ion-radio style="margin-left: 5px" value="false"></ion-radio>
+                                                </ion-item>
+                                            </ion-radio-group>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-col>
+                            </ion-row>
+                            <div [hidden]="!this.hasNewDamage">
+                                <ion-row>
+                                    <ion-col>
+                                        <ion-list lines="none">
+                                            <ion-item>
+                                                <ion-label>Lato del veicolo</ion-label>
+                                                <ion-select placeholder="Seleziona il lato" #position interface="popover">
+                                                    <ion-select-option #position *ngFor="let p of positionKeys" [value]="p">{{damageMap[p]}}</ion-select-option>
+                                                </ion-select>
+                                            </ion-item>
+
+                                            <ion-item>
+                                                <ion-label>Posizione esatta del danno</ion-label>
+                                                <ion-select placeholder="Seleziona la posizione" #rel_position interface="popover">
+                                                    <ion-select-option *ngFor="let r of relativePositionKeys" [value]="r">{{positionMap[r]}}</ion-select-option>
+                                                </ion-select>
+                                            </ion-item>
+                                            <ion-item>
+                                                <ion-label>Tipo danno</ion-label>
+                                                <ion-select placeholder="Seleziona il tipo di danno" #dam_type interface="popover">
+                                                    <ion-select-option *ngFor="let t of typeKeys" [value]="t">{{typeMap[t]}}</ion-select-option>
+                                                </ion-select>
+                                            </ion-item>
+                                            <ion-item>
+                                                <ion-label>Descrizione danno</ion-label>
+                                                <ion-input style="margin-left: 20px" placeholder="Inserisci la descrizione... "></ion-input>
+                                            </ion-item>
+
+                                            <ion-item>
+                                                <ion-label>Foto del danno</ion-label>
+                                                <input type="file" accept="image/*" />
+                                            </ion-item>
+                                        </ion-list>
+                                    </ion-col>
+                                </ion-row>
+                            </div>
+                        </ion-grid>
+                    </ion-card>
+
+                    <div *ngFor="let d of damages">
+                        <ion-item>
+                            <ion-card card-damage>
+                                <ion-card-content>
+                                    <ion-label style="font-weight: bold; font-size: 16px">Danno:</ion-label>
+
+                                    <ion-grid>
+                                        <ion-row>
+                                            <ion-col>
+                                                <ion-label> Posizione: </ion-label>
+                                            </ion-col>
+                                            <ion-col>
+                                                <ion-label style="font-weight: bold">{{damageMap[d.position]}}</ion-label>
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col>
+                                                <ion-label> Componente: </ion-label>
+                                            </ion-col>
+                                            <ion-col>
+                                                <ion-label style="font-weight: bold">{{positionMap[d.relativePosition]}}</ion-label>
+                                            </ion-col>
+                                        </ion-row>
+                                        <ion-row>
+                                            <ion-col>
+                                                <ion-label> Tipo danno: </ion-label>
+                                            </ion-col>
+                                            <ion-col>
+                                                <ion-label style="font-weight: bold">{{typeMap[d.type]}}</ion-label>
+                                            </ion-col>
+                                        </ion-row>
+                                    </ion-grid>
+
+                                    <div *ngIf="d.picture!==null ">
+                                        <img center src="" />
+                                    </div>
+                                </ion-card-content>
+                            </ion-card>
+                        </ion-item>
+                    </div>
+
+                    <ion-grid>
+                        <ion-row>
+                            <ion-col style="min-width: 10%">
+                                <ion-button (click)="slidePrev() ">Back</ion-button>
+                            </ion-col>
+
+                            <ion-col style="min-width: 10%">
+                                <ion-button (click)="addElement() ">aggiungi</ion-button>
+                            </ion-col>
+
+                            <ion-col style="min-width: 10%">
+                                <ion-button (click)="slideNext() " size="medium ">Next</ion-button>
+                            </ion-col>
+                        </ion-row>
+                    </ion-grid>
+                </ion-card>
+            </ion-content>
+        </ion-slide>
+        <ion-slide>
+            <ion-content class="scroll" display>
+                <ion-card>
+                    <ion-card-content>
+                        <ion-grid>
+                            <ion-row>
+                                <ion-col>
+                                    <h1 center>Firma</h1>
+                                </ion-col>
+                            </ion-row>
+
+                            <ion-row>
+                                <ion-col>
+                                    <div #container class="container">
+                                        <ion-button id="clear" (click)="canvasDrawer.clearCanvas() ">
+                                            <ion-icon name="trash-outline"></ion-icon>
+                                        </ion-button>
+                                        <canvas #canvas canvas height="300" width="300" (mousedown)="canvasDrawer.writingStart($event) " (mousemove)="canvasDrawer.writingInProgress($event) " (mouseup)="canvasDrawer.drawingEnd($event) " (mouseout)="canvasDrawer.drawingEnd($event) "></canvas>
+                                    </div>
+                                </ion-col>
+                            </ion-row>
+                            <ion-row>
+                                <ion-col>
+                                    <ion-button (click)="slidePrev() ">Back</ion-button>
+                                </ion-col>
+                                <ion-col>
+                                    <ion-button (click)="slideNext() " size="medium ">Invia Dati</ion-button>
+                                </ion-col>
+                            </ion-row>
+                        </ion-grid>
+                    </ion-card-content>
+                </ion-card>
+            </ion-content>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
